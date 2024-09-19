@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Info</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Erica+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+        <link rel="icon" href="flag-regular.svg">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Country Information by Capital</h1>
+        <div class="form-group">
+            <input type="text" id="capitalInput" class="form-control" placeholder="Enter capital city">
+        </div>
+        <button class="btn btn-primary" onclick="getCountryInfo()">Search</button>
+        
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+function getCountryInfo() {
+    const capital = document.getElementById('capitalInput').value;
+    const url = `https://restcountries.com/v3.1/capital/${capital}`;
+
+    axios.get(url)
+        .then(response => {
+            const country = response.data[0];
+            const name = country.name.common;
+            const population = country.population.toLocaleString();
+            const region = country.region;
+            const languages = Object.values(country.languages).join(', ');
+            const flag = country.flags.svg;
+
+            document.getElementById('result').innerHTML = `
+                <div class="card">
+                    <img src="${flag}" class="card-img-top" alt="Flag of ${name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${name}</h5>
+                        <p class="card-text"><strong>Population:</strong> ${population}</p>
+                        <p class="card-text"><strong>Region:</strong> ${region}</p>
+                        <p class="card-text"><strong>Languages:</strong> ${languages}</p>
+                    </div>
+                </div>
+            `;
+        })
+        .catch(error => {
+            document.getElementById('result').innerHTML = `<p class="text-danger">No country found for the given capital city.</p>`;
+        });
+}
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+body {
+    background-image: url("boy_holding_world.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+
+h1 {
+    font-family: 'Platypi', cursive;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #ffffff 0%, #904ce2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+}
+
+button{
+    background-color: #8639e4 !important;
+    border-color: #8639e4 !important;
+}
+button:hover{
+    background-color: #df9ae8 !important;
+    border-color: #df9ae8 !important;
+}
+
+
+
+#result{
+    width: 400px;
+    height: 500px;
+}
+
+@media(max-width:567px) {
+    h1 {
+        font-size: 0.8rem;
+        text-align: left;
+        
+    }
+    body{
+        background-size: 100%;
+        background-image: url("/boy_holding_world2.jpg");
+        
+    }
+    #capitalInput{
+        width: 70%;
+    }
+    #result{
+        width: 80%;
+        height: 50%;
+    }
+}
